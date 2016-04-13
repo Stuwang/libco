@@ -1,0 +1,5 @@
+#include <atomic>
+
+namespace co{
+
+};
