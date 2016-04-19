@@ -48,6 +48,7 @@ public:
 	 * @Param self
 	 */
 	static void task_fun_(Task * self);
+
 private:
 	TaskState state_;
 	std::function<void()> fun_;
