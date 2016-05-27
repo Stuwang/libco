@@ -1,15 +1,17 @@
 
 include define.mk
 
-OBJS=coroute.o Task.o
+OBJS=coroute.o Task.o taskshduler.o
 TARGET=libco.a
 
 .PHONY:all
 
 all:$(OBJS)
-	$(AR) -v -q $(TARGET) $(OBJS)
+	$(AR) rcs $(TARGET) $(OBJS)
+
 $(OBJS): %.o: %.cpp
 	$(CXX) -c $< $(CXXFLAG)
 
 clean:
-	rm *.o
+	$(call clean) \
+	rm main *.o *.out ${OBJ} -rf

@@ -42,6 +42,8 @@ public:
 	 */
 	bool SwapOut();
 
+	TaskState getState(){return state_;};
+
 	/**
 	 * @Synopsis   func in ucontext,*
 	 *

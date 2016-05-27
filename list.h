@@ -2,6 +2,8 @@
 #define _LIST_H_
 
 #include <list>
+#include <mutex>
+#include <algorithm>
 #include "spinlock.h"
 
 namespace co{
@@ -12,7 +14,7 @@ public:
 	T* get(){
 		T *ret = nullptr;
 		{
-			lock_guard<spinlock> l(lock_);
+			std::lock_guard<co::spinlock> l(lock_);
 			if(list_.size()){
 				ret = *list_.begin();
 				list_.erase(list_.begin());
@@ -22,20 +24,26 @@ public:
 	};
 
 	void pop(T *p){
-		lock_guard<spinlock> l(lock_);
-		auto i = list_.find(p);
-		if(p!= list_.end())
-			list_.erase(p);
+		std::lock_guard<spinlock> l(lock_);
+		// auto i = list_.find(p);
+		// auto i = std::find(begin(list_),end(list_),p);
+		auto i = std::find(list_.begin(),list_.begin(),p);
+		if(i!= list_.end())
+			list_.erase(i);
 };
 
 	void put(T *t){
-		lock_guard<spinlock> l(lock_);
+		std::lock_guard<spinlock> l(lock_);
 		list_.push_back(t);
 	};
 	bool empty(){
-		lock_guard<spinlock> l(lock_);
+		std::lock_guard<spinlock> l(lock_);
 		return list_.empty();
 	};
+	size_t size(){
+		std::lock_guard<spinlock> l(lock_);
+		return list_.size();	
+	}
 private:
 	std::list<T*> list_;
 	spinlock lock_;

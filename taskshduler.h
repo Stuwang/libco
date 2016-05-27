@@ -2,6 +2,7 @@
 #define _TASKSHDULER_H_ 
 
 #include "list.h"
+#include "Task.h"
 
 namespace co{
 
@@ -14,6 +15,7 @@ public:
 	 */
 	void addTask(std::function<void()> const& fn);
 	
+	// maybe nouse
 	void addTask(Task *p);
 	/**
 	 * @Synopsis 获取一个任务 
@@ -27,6 +29,8 @@ public:
 	 * @Param p
 	 */
 	void cancleTask(Task * p);
+
+	void yield();
 	/**
 	 * @Synopsis 运行一次 
 	 */
@@ -41,14 +45,16 @@ public:
 	 * @Returns   
 	 */
 	bool empty(){return tasklist_.empty();};
+
+	size_t size(){return tasklist_.size();}
 private:
+	Task * use_;
 	safelist<Task> tasklist_;
 };
 
-static taskshduler & gettaskinstense(){
-	static taskshduler taskl_;
-	return taskl_;
-};
+taskshduler & gettaskinstense();
+
+void yield();
 
 };
 

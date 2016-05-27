@@ -1,7 +1,35 @@
-ROOTDIR=/home/w/tmp/libgo/mine
+ROOTDIR=/home/w/git/libco
 
 AR=ar
 CXX=clang++
-INCLUDE=$(ROOTDIR)
+INCLUDE=$(ROOTDIR)/
 
-CXXFLAG=-I$(INCLUDE) -g -std=c++11 
+
+# ------
+
+DEBUG=-g
+
+OPTIMIZATION=-O2
+
+WALL_INFO=-Wall
+#-Wall
+#-Werror
+
+STDCPP=-std=c++11
+
+CXXFLAG=-I$(INCLUDE) $(DEBUG) $(OPTIMIZATION) $(WALL_INFO) $(STDCPP)
+
+
+#----
+
+define make_subdir
+	@for subdir in $(SUBDIRS) ; do \
+	( cd $$subdir && make -j4 ) \
+	done;
+endef
+
+define clean
+	@for subdir in $(SUBDIRS) ; do \
+	( cd $$subdir && make clean) \
+	done;
+endef
