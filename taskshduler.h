@@ -44,6 +44,11 @@ public:
 	 *
 	 * @Returns   
 	 */
+
+	Task * getCurTask(){
+		return use_;
+	};
+
 	bool empty(){return tasklist_.empty();};
 
 	size_t size(){return tasklist_.size();}

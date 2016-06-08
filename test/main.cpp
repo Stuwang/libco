@@ -2,34 +2,36 @@
 
 #include "Task.h"
 #include "taskshduler.h"
+#include "co_mutex.h"
 
 auto & p = co::gettaskinstense();
 
-void testf1();
-void testf2();
+co::co_mutex m;
 
-void testf1(){
-	static int i = 0;
-	int tmp = i++;
-
-	p.addTask(testf2);
-	std::cout << "AAAAA " << tmp << " start" << std::endl;
-	co::yield();
-	std::cout << "AAAAA " << tmp << " end" << std::endl;
+void lock_test() {
+	std::cout << "1 lock " << p.size()  << std::endl;
+	m.lock();
+	std::cout << "1 lock endl " << p.size()  << std::endl;
 };
 
-void testf2(){
-	static int i = 0;
-	int tmp = i++;
+void unlock_test() {
+	std::cout << "3 unlock " << p.size()  << std::endl;
+	m.unlock();
+	std::cout << "3 unlock endl" << p.size()  << std::endl;
+};
 
-	p.addTask(testf1);
-	std::cout << "BBBBB " << tmp << " start" << std::endl;
-	co::yield();
-	std::cout << "BBBBB " << tmp << " end" << std::endl;
-}
 
-int main(){
-	p.addTask(testf1);
+
+int main() {
+	p.addTask(lock_test);
+
+	p.addTask(lock_test);
+
+	p.addTask(unlock_test);
+	
+	// p.addTask(lock_test);
+
+	// p.addTask(unlock_test);
 
 	std::cout << "begin " << p.size() << std::endl;
 	p.run();

@@ -44,6 +44,8 @@ public:
 
 	TaskState getState(){return state_;};
 
+	void SetState(TaskState state){state_ = state;};
+
 	/**
 	 * @Synopsis   func in ucontext,*
 	 *
