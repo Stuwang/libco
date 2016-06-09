@@ -37,13 +37,21 @@ void taskshduler::run() {
 		use_->SwapIn();
 		// std::cout << "in fact , task 2  " << std::endl;
 		switch (use_->getState()) {
-		case TaskState::Init: addTask(use_); break;
-		case TaskState::Runnable: addTask(use_); break;
+		case TaskState::Init:
+			addTask(use_);
+			break;
+		case TaskState::Runnable:
+			addTask(use_);
+			break;
 		case TaskState::Sysblock:
 			// std::cout << "system block " << size() << std::endl ;
 			break;
-		case TaskState::Done: delete use_; break;
-		case TaskState::Fatal: assert(false); break;
+		case TaskState::Done:
+			delete use_;
+			break;
+		case TaskState::Fatal:
+			assert(false);
+			break;
 		default:
 			assert(false);
 		}

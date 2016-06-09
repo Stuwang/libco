@@ -31,7 +31,7 @@ public:
 	inline void unlock() {
 		// std::cout << "unlock it " << std::endl;
 		std::unique_lock<spinlock> lk(lock_);
-		
+
 		if (tasklist_.size()) {
 			auto p = this->tasklist_.get();
 			p->SetState(TaskState::Runnable);
