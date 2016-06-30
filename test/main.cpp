@@ -22,9 +22,18 @@ void unlock_test() {
 	std::cout << i << " unlock endl" << p.size()  << std::endl;
 };
 
+void test0() {
+	p.addTask(lock_test<4>);
+
+	p.addTask(unlock_test < -1 > );
+
+	p.run();
+
+	std::cout << "end" << std::endl;
+}
 
 
-int main() {
+void test1() {
 	p.addTask(lock_test<1>);
 	p.addTask(lock_test<2>);
 	p.addTask(lock_test<3>);
@@ -42,4 +51,8 @@ int main() {
 	std::cout << "begin " << p.size() << std::endl;
 	p.run();
 	std::cout << "end " << p.size()  << std::endl;
+}
+
+int main() {
+	test1();
 }

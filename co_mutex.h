@@ -21,6 +21,7 @@ public:
 			gettaskinstense().yield();
 		} else {
 			locked_ = true;
+			lk.unlock();
 			return;
 		}
 	};
