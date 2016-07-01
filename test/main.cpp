@@ -3,6 +3,7 @@
 #include "Task.h"
 #include "taskshduler.h"
 #include "co_mutex.h"
+#include "co_condition.h"
 
 auto & p = co::gettaskinstense();
 
@@ -51,8 +52,35 @@ void test1() {
 	std::cout << "begin " << p.size() << std::endl;
 	p.run();
 	std::cout << "end " << p.size()  << std::endl;
+};
+
+bool c = true;
+co::co_condition cond;
+co::co_mutex m_test2;
+
+void test2() {
+	p.addTask([]() {
+		std::unique_lock<co::co_mutex> lk(m_test2);
+		std::cout << "start wait" << std::endl;
+		while (c) {
+			cond.wait(lk);
+		};
+		std::cout << "after wait" << std::endl;
+	});
+
+	p.addTask([]() {
+		std::unique_lock<co::co_mutex> lk(m_test2);
+		std::cout << "start notify" << std::endl;
+		c = false;
+		cond.notify_all();
+		std::cout << "after notify" << std::endl;
+	});
+
+	std::cout << "begin " << p.size() << std::endl;
+	p.run();
+	std::cout << "end " << p.size()  << std::endl;
 }
 
 int main() {
-	test1();
+	test2();
 }

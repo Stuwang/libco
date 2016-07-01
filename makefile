@@ -1,7 +1,7 @@
 
 include define.mk
 
-OBJS=coroute.o Task.o taskshduler.o
+OBJS=coroute.o Task.o taskshduler.o co_mutex.o co_condition.o
 TARGET=libco.a
 
 .PHONY:all
