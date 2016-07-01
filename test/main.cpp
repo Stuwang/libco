@@ -60,12 +60,26 @@ co::co_mutex m_test2;
 
 void test2() {
 	p.addTask([]() {
-		std::unique_lock<co::co_mutex> lk(m_test2);
-		std::cout << "start wait" << std::endl;
-		while (c) {
-			cond.wait(lk);
-		};
-		std::cout << "after wait" << std::endl;
+		{
+			std::unique_lock<co::co_mutex> lk(m_test2);
+			std::cout << "start wait 1" << std::endl;
+			while (c) {
+				cond.wait(lk);
+			};
+			std::cout << std::boolalpha << m_test2.locked() << std::endl;
+		}
+		std::cout << "after wait 1" << std::boolalpha << m_test2.locked() << std::endl;
+	});
+
+	p.addTask([]() {
+		{
+			std::unique_lock<co::co_mutex> lk(m_test2);
+			std::cout << "start wait 2" << std::endl;
+			while (c) {
+				cond.wait(lk);
+			};
+		}
+		std::cout << "after wait 2" << std::boolalpha << m_test2.locked() << std::endl;
 	});
 
 	p.addTask([]() {
