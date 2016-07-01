@@ -2,7 +2,7 @@ include ../define.mk
 CXXFLAG_LINK+= -lco -I.. -L..
 
 all:main.o
-	$(CXX) $< -o test.out $(CXXFLAG_LINK)
+	$(CXX) $< -o test $(CXXFLAG_LINK)
 
 main.o:main.cpp
 	$(CXX) -c $< $(CXXFLAG)

@@ -31,11 +31,9 @@ void taskshduler::yield() {
 };
 
 void taskshduler::run() {
-	while (!empty()) {
-		// std::cout << "start run a task " << size() << std::endl;
+	while (!empty()) {	
 		use_ = getTask();
 		use_->SwapIn();
-		// std::cout << "in fact , task 2  " << std::endl;
 		switch (use_->getState()) {
 		case TaskState::Init:
 			addTask(use_);
