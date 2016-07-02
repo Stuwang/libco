@@ -58,9 +58,19 @@ bool c = true;
 co::co_condition cond;
 co::co_mutex m_test2;
 
+struct TestDes {
+	TestDes() {
+		std::cout << "constructor" << std::endl;
+	}
+	~TestDes() {
+		std::cout << "destructor" << std::endl;
+	}
+};
+
 void test2_help() {
 	p.addTask([]() {
 		{
+			TestDes _;
 			m_test2.lock();
 
 			std::cout << "Except true 	" << std::boolalpha << m_test2.locked() << std::endl;
