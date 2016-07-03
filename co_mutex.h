@@ -25,9 +25,33 @@ private:
 	spinlock lock_;
 };
 
-template<MutexType>
 class co_unique_lock {
-	
+public:
+	co_unique_lock(co_mutex& mutex): m_lock(&mutex) {
+		m_lock->lock();
+	};
+
+	~co_unique_lock() {
+		if (m_lock->locked()) {
+			m_lock->unlock();
+		}
+	};
+
+	void lock() {
+		assert(!m_lock->locked());
+		m_lock->lock();
+	};
+
+	bool locked() {
+		return m_lock->locked();
+	};
+
+	void unlock() {
+		assert(m_lock->locked());
+		m_lock->unlock();
+	};
+private:
+	co_mutex * m_lock;
 };
 
 }

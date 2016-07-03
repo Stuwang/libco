@@ -1,7 +1,7 @@
 ROOTDIR=/home/w/git/libco
 
 AR=ar
-CXX=g++
+CXX=clang++
 INCLUDE=$(ROOTDIR)/
 
 

@@ -1,0 +1,21 @@
+lock 
+start wait 1 true
+unlock 
+lock 
+start wait 2 true
+unlock 
+lock 
+start notify
+after notify 	true
+unlock 
+after notify--false
+test what the fuck 1 !!! 
+test what the fuck 2 !!! 
+test what the fuck 3 !!! 
+lock 
+----
+Except true 	true
+after wait 1 except false : true
+test what the fuck 1 !!! 
+test what the fuck 2 !!! 
+test what the fuck 3 !!! 

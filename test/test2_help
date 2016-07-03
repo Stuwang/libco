@@ -1,0 +1,32 @@
+constructor
+lock 
+Except true 	true
+unlock 
+lock 
+22 Except true 	true
+unlock 
+lock 
+start notify
+after notify 	true
+unlock 
+after notify--false
+test what the fuck 1 !!! 
+test what the fuck 2 !!! 
+test what the fuck 3 !!! 
+lock 
+----
+Except true 	true
+unlock 
+destructor
+after wait 1 except false : false
+test what the fuck 1 !!! 
+test what the fuck 2 !!! 
+test what the fuck 3 !!! 
+lock 
+----
+22 Except true 	true
+unlock 
+22 after wait  except false : false
+tasklist_ 0
+tasklist_ 0
+tasklist_ 0

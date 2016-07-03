@@ -205,6 +205,46 @@ void test2() {
 	// std::cout << "end " << p.size()  << std::endl;
 }
 
+void test_myuniquelock() {
+	p.addTask([]() {
+		{
+			co::co_unique_lock lk(m_test2);
+			std::cout << "start wait 1 " << std::boolalpha << lk.locked() << std::endl;
+			while (c) {
+				cond.wait(lk);
+			};
+			std::cout << "after wait 1 " << std::boolalpha << lk.locked() << std::endl;
+		}
+		std::cout << "except false " << std::boolalpha << m_test2.locked() << std::endl;
+	});
+
+	p.addTask([]() {
+		{
+			co::co_unique_lock lk(m_test2);
+			std::cout << "start wait 2 " << std::boolalpha << lk.locked() << std::endl;
+			while (c) {
+				cond.wait(lk);
+			};
+			std::cout << "after wait 2 " << std::boolalpha << lk.locked() << std::endl;
+		}
+	});
+
+	p.addTask([]() {
+		{
+			std::unique_lock<co::co_mutex> lk(m_test2);
+			std::cout << "start notify" << std::endl;
+			c = false;
+			cond.notify_all();
+			std::cout << "after notify 	" <<  std::boolalpha << m_test2.locked() << std::endl;
+		}
+		std::cout << "after notify--" << std::boolalpha << m_test2.locked() << std::endl;
+	});
+
+	// std::cout << "begin " << p.size() << std::endl;
+	p.run();
+	// std::cout << "end " << p.size()  << std::endl;
+}
+
 co::co_mutex m_test3;
 
 void test3() {
@@ -228,5 +268,5 @@ void test3() {
 };
 
 int main() {
-	test2();
+	test_myuniquelock();
 }
