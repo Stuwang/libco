@@ -4,7 +4,7 @@
 using namespace std;
 
 class my_lock {
-public:	
+public:
 	my_lock(): locked_(false) {};
 
 	void lock() {
@@ -18,7 +18,7 @@ public:
 	bool locked() {
 		return locked_;
 	}
-private:
+// private:
 	mutex m_;
 	bool locked_;
 };
@@ -30,5 +30,5 @@ int main() {
 		lk.unlock();
 		lk.lock();
 	}
-	cout << "locked :" << boolalpha << m.locked() << endl;
+	cout << "locked :" << boolalpha << m.m_.try_lock() << endl;
 }

@@ -1,7 +1,7 @@
 ROOTDIR=/home/w/git/libco
 
 AR=ar
-CXX=clang++
+CXX=g++
 INCLUDE=$(ROOTDIR)/
 
 
@@ -9,7 +9,7 @@ INCLUDE=$(ROOTDIR)/
 
 DEBUG=-g
 
-OPTIMIZATION=-O0
+OPTIMIZATION=-O2
 
 WALL_INFO=-Wall
 #-Wall

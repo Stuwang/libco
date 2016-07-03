@@ -22,15 +22,6 @@ void co_condition::wait(std::unique_lock<co_mutex>& lock) {
 
 	std::cout << "test what the fuck 1 !!! " << std::endl;
 
-	std::cout << "test what the fuck 2 !!! " << std::endl;
-
-	std::cout << "test what the fuck 3 !!! " << std::endl;
-
-	{
-		std::unique_lock<spinlock> lk(lock_);
-		auto cur_task = gettaskinstense().getCurTask();
-		cur_task->SetState(TaskState::Runnable);
-	}
 	u_lock->lock();
 	std::cout << "----" << std::endl;
 
@@ -52,15 +43,6 @@ void co_condition::wait(co_mutex& lock) {
 
 	std::cout << "test what the fuck 1 !!! " << std::endl;
 
-	std::cout << "test what the fuck 2 !!! " << std::endl;
-
-	std::cout << "test what the fuck 3 !!! " << std::endl;
-
-	{
-		std::unique_lock<spinlock> lk(lock_);
-		auto cur_task = gettaskinstense().getCurTask();
-		cur_task->SetState(TaskState::Runnable);
-	}
 	u_m_lock->lock();
 	std::cout << "----" << std::endl;
 

@@ -25,6 +25,11 @@ private:
 	spinlock lock_;
 };
 
+template<MutexType>
+class co_unique_lock {
+	
+};
+
 }
 
 #endif

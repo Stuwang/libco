@@ -10,6 +10,7 @@ co_mutex::~co_mutex() {
 }
 
 void co_mutex::lock() {
+	std::cout << "lock " << std::endl;
 	std::unique_lock<spinlock> lk(lock_);
 	if (locked_) {
 		auto cur_task = gettaskinstense().getCurTask();
@@ -30,6 +31,7 @@ bool co_mutex::locked() {
 }
 
 void co_mutex::unlock() {
+	std::cout << "unlock " << std::endl;
 	std::unique_lock<spinlock> lk(lock_);
 
 	if (tasklist_.size()) {
