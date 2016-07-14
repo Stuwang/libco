@@ -1,23 +1,35 @@
+
+
+
 ## libco
 
 主要借鉴 yuyangzi的libgo 实现自己的协程
 
-libco:
-https://github.com/yyzybb537/libgo
+>###[libgo](https://github.com/yyzybb537/libgo) - 协程库、并行编程库
 
-进度
+>libgo是一个使用C++11编写的协作式调度的stackful协程库,
+
+>同时也是一个强大的并行编程库, 是专为Linux服务端程序开发设计的底层框架。
+
+--------------
+
+####已完成工作
 
 实现协程
 单线程执行
 实现协程锁
 实现协程条件变量
 
-下一步计划
+------------------
 
-实现
+####下一步计划
 
-sleep
-hook io操作
-实现类似的select功能
-实现chann(这个很简单)
-实现多线程
+* sleep
+* hook io操作
+* 实现类似的select功能
+* 实现chann(这个很简单)
+* 实现多线程
+
+单元测试
+
+------------
