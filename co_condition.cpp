@@ -20,10 +20,10 @@ void co_condition::wait(std::unique_lock<co_mutex>& lock) {
 
 	gettaskinstense().yield();
 
-	std::cout << "test what the fuck 1 !!! " << std::endl;
+	// std::cout << "test what the fuck 1 !!! " << std::endl;
 
 	u_lock->lock();
-	std::cout << "----" << std::endl;
+	// std::cout << "----" << std::endl;
 
 };
 
@@ -41,10 +41,10 @@ void co_condition::wait(co_unique_lock& lock) {
 
 	gettaskinstense().yield();
 
-	std::cout << "test what the fuck 1 !!! " << std::endl;
+	// std::cout << "test what the fuck 1 !!! " << std::endl;
 
 	u_culock->lock();
-	std::cout << "----" << std::endl;
+	// std::cout << "----" << std::endl;
 
 };
 
@@ -62,10 +62,10 @@ void co_condition::wait(co_mutex& lock) {
 
 	gettaskinstense().yield();
 
-	std::cout << "test what the fuck 1 !!! " << std::endl;
+	// std::cout << "test what the fuck 1 !!! " << std::endl;
 
 	u_m_lock->lock();
-	std::cout << "----" << std::endl;
+	// std::cout << "----" << std::endl;
 
 };
 

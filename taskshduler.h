@@ -20,16 +20,14 @@ public:
 	/**
 	 * @Synopsis 获取一个任务 
 	 *
-	 * @Returns   
-	 */
-	Task *getTask();
-	/**
-	 * @Synopsis 取消任务 
 	 *
 	 * @Param p
 	 */
 	void cancleTask(Task * p);
 
+	/*
+	 * 交出控制权
+	 */
 	void yield();
 	/**
 	 * @Synopsis 运行一次 
@@ -48,6 +46,8 @@ public:
 	Task * getCurTask(){
 		return use_;
 	};
+
+	Task * getTask();
 
 	bool empty(){return tasklist_.empty();};
 
