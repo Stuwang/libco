@@ -18,7 +18,6 @@ void co_mutex::lock() {
 		gettaskinstense().yield();
 	} else {
 		locked_ = true;
-		// lk.unlock();
 		return;
 	}
 };

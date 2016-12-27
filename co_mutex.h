@@ -1,6 +1,8 @@
 #ifndef _CO_MUTEX_H_
 #define _CO_MUTEX_H_
 
+#include "define.h"
+
 #include "Task.h"
 #include "list.h"
 #include "taskshduler.h"
@@ -23,6 +25,8 @@ private:
 	safelist<Task> tasklist_;
 	bool locked_;
 	spinlock lock_;
+
+	DISABLE_COPY_MOVE(co_mutex);
 };
 
 class co_unique_lock {
@@ -50,6 +54,8 @@ public:
 		assert(m_lock->locked());
 		m_lock->unlock();
 	};
+
+	DISABLE_COPY_MOVE(co_unique_lock);
 private:
 	co_mutex * m_lock;
 };
