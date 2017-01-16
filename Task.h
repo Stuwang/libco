@@ -13,6 +13,7 @@ enum class TaskState{
 	Init,
 	Runnable,
 	Sysblock,
+	IOBlock,
 	Done,
 	Fatal,
 };

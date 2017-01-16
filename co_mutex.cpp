@@ -5,12 +5,10 @@ namespace co {
 co_mutex::co_mutex(): locked_(false) {};
 
 co_mutex::~co_mutex() {
-	std::cout << "tasklist_ " << tasklist_.size() << std::endl;
 	assert(0 == tasklist_.size());
 }
 
 void co_mutex::lock() {
-	std::cout << "lock " << std::endl;
 	std::unique_lock<spinlock> lk(lock_);
 	if (locked_) {
 		auto cur_task = gettaskinstense().getCurTask();
@@ -20,7 +18,6 @@ void co_mutex::lock() {
 		gettaskinstense().yield();
 	} else {
 		locked_ = true;
-		lk.unlock();
 		return;
 	}
 };
@@ -31,7 +28,6 @@ bool co_mutex::locked() {
 }
 
 void co_mutex::unlock() {
-	std::cout << "unlock " << std::endl;
 	std::unique_lock<spinlock> lk(lock_);
 
 	if (tasklist_.size()) {

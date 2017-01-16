@@ -1,6 +1,7 @@
 #ifndef _CO_CONDITION_H_
 #define _CO_CONDITION_H_
 
+#include "define.h"
 #include "co_mutex.h"
 
 namespace co {
@@ -14,6 +15,8 @@ public:
 	void wait(co_mutex& lock);
 	void notify_one();
 	void notify_all();
+
+	DISABLE_COPY_MOVE(co_condition);
 private:
 	safelist<Task> tasklist_;
 	std::unique_lock<co_mutex> *u_lock;

@@ -10,7 +10,7 @@ all:$(OBJS)
 	$(AR) rcs $(TARGET) $(OBJS)
 
 $(OBJS): %.o: %.cpp
-	$(CXX) -c $< $(CXXFLAG)
+	$(CXX) $(CXXFLAG) -c $< 
 
 clean:
 	$(call clean) \
